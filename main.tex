@@ -1,0 +1,109 @@
+\documentclass{article}
+% !TEX root
+\usepackage[a4paper, margin=0.5in]{geometry}
+% \usepackage[utf8]{inputenc}
+\usepackage{lmodern}
+\usepackage[T1]{fontenc}
+\usepackage{amssymb}
+\usepackage{graphicx}
+% \usepackage{enumitem}
+\usepackage{enumerate}
+\usepackage{tikz}
+\usepackage{array}
+\usepackage{listings}
+\usepackage{color}
+\usepackage{upquote}
+% \usepackage{wasysym}
+\usepackage{multirow}
+\usepackage{multicol}
+% \usepackage{romannum}
+\usepackage{xcolor}
+\usepackage{amsmath}
+\usepackage{pgfplots}
+\usepackage{diagbox}
+\usepackage{subfiles}
+
+\setlength{\columnsep}{1cm}
+
+\pgfplotsset{compat=1.14}
+\usepackage{macros} 
+
+\graphicspath{ {images/} }
+
+\title{CPSC 418 Review}
+
+\author{
+    \begin{tabular}{lll}
+        Zhenpeng Wu & 28125152 & w8j0b\\
+    \end{tabular}
+}
+    
+\begin{document}
+
+% \maketitle
+
+\section{Erlang}
+
+\subfile{"sections/01. Erlang"}
+
+\pagebreak
+
+\section{Reduce}
+
+\subfile{"sections/02. Reduce"}
+
+\section{Scan}
+
+\subfile{"sections/03. Scan"}
+
+\pagebreak
+
+\section{Shared Memory Multiprocessors - Parallel Models}
+
+\subfile{"sections/04. Shared Memory Multiprocessors"}
+
+\pagebreak
+
+\section{Message Passing Computers - Parallel Models}
+
+\subfile{"sections/05. Message Passing Computers"}
+
+\pagebreak
+
+\section{Superscalar Processors: Computer Architecture - Parallel Models}
+
+\subfile{"sections/06. Superscalar Processors"}
+
+\pagebreak
+
+\section{Performance Loss}
+
+\subfile{"sections/07. Performance Loss"}
+
+% \pagebreak
+
+\section{Models of Parallel Computation}
+
+\subfile{"sections/08. Models of Parallel Computation"}
+
+% \pagebreak
+
+\section{Energy and Parallel Computing}
+
+\subfile{"sections/09. Energy and Parallel Computing.tex"}
+
+\pagebreak
+
+\section{Sorting Networks}
+
+\subfile{"sections/10. Sorting Networks"}
+
+\pagebreak
+
+\section{Data Parallel Computing and CUDA}
+
+\subfile{"sections/11. Data Parallel Computing and CUDA"}
+
+\appendix
+
+\end{document}

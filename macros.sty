@@ -1,0 +1,181 @@
+% These are some macros useful for CPSC 418 documents which are not
+% written in beamer.
+\ProvidesPackage{macros}
+
+
+\usepackage{soul,color}
+
+% colors for stuff
+\definecolor{CodeColor}{rgb}{0,0.0,0.7}
+\definecolor{CommentColor}{rgb}{0.6,0.0,0.6}
+\definecolor{OutColor}{rgb}{0.0,0.0,0.0}
+\definecolor{URLcolor}{rgb}{0.0,0.3,0.8}
+\definecolor{URLdarkcolor}{rgb}{0.0,0.0,0.6}
+\definecolor{ErrorColor}{rgb}{1.0,0.0,0.0}
+\definecolor{SymColor}{rgb}{0.0,0.5,0.0}
+\definecolor{LightGray}{gray}{0.7}
+\definecolor{LightBlue}{rgb}{0.7,0.7,1.0}
+\definecolor{LightRed}{rgb}{1.0,0.7,0.7}
+\definecolor{LightGreen}{rgb}{0.5,1.0,0.5}
+\definecolor{LightMagenta}{rgb}{1.0,0.5,1.0}
+\definecolor{MediumRed}{rgb}{0.8,0.0,0.0}
+\definecolor{MediumGreen}{rgb}{0.0,0.7,0.0}
+\definecolor{MediumMagenta}{rgb}{0.7,0.0,0.7}
+\definecolor{DarkMagenta}{rgb}{0.5,0.0,0.5}
+\definecolor{DarkGreen}{rgb}{0.0,0.5,0.0}
+\definecolor{DarkRed}{rgb}{0.6,0.0,0.0}
+\definecolor{DarkBlue}{rgb}{0.0,0.0,0.7}
+\definecolor{anscolor}{rgb}{0.0,0.4,0.2} % for solution sets
+\definecolor{red}{rgb}{0.8,0.0,0.0}
+
+% formatting source code
+\newcommand{\code}[1]{\texttt{\color{CodeColor}#1}}
+\newcommand{\smallcode}[1]{\small\texttt{\color{CodeColor}#1}}
+\newcommand{\footcode}[1]{\footnotesize\texttt{\color{CodeColor}#1}}
+\newcommand{\scriptcode}[1]{\scriptsize\texttt{\color{CodeColor}#1}}
+\newcommand{\tinycode}[1]{\tiny\texttt{\color{CodeColor}#1}}
+\newcommand{\codetabs}{xx\=xx\=xx\=xx\=xx\=xx\=xx\=xx\=xx\=xx\=xx\=}
+\newenvironment{xcode}{%
+  \tt\color{CodeColor}\begin{tabbing}\codetabs\+\kill}{\end{tabbing}}
+\newenvironment{pcode}{% pseudo-code
+  \rm\color{CodeColor}\begin{tabbing}\codetabs\+\kill}{\end{tabbing}}
+\newenvironment{SmallCode}{% code typeset \small
+  \tt\small\color{CodeColor}\begin{tabbing}\codetabs\+\kill}{\end{tabbing}}
+\newenvironment{FootCode}{% code typeset \footnotesize
+  \tt\footnotesize\color{CodeColor}\begin{tabbing}\codetabs\+\kill}{\end{tabbing}}
+\newenvironment{ScriptCode}{% code typeset scriptsize
+  \tt\scriptsize\color{CodeColor}\begin{tabbing}\codetabs\+\kill}{\end{tabbing}}
+\newenvironment{TinyCode}{% code typeset \tiny
+  \tt\tiny\color{CodeColor}\begin{tabbing}\codetabs\+\kill}{\end{tabbing}}
+\newcommand{\xcomment}[1]{{\color{CommentColor}\% \textrm{#1}}}
+\newcommand{\ycomment}[2]{{\color{CommentColor}\% #1\textrm{: #2}}}
+\newcommand{\ccomment}[1]{{\color{CommentColor}// \textrm{#1}}}
+\newcommand{\xout}[1]{{\color{OutColor}#1}}
+\newcommand{\xerr}[1]{{\color{ErrorColor}#1}}
+\newcommand{\xsym}[1]{{\color{SymColor}\it#1}}
+\newcommand{\msym}[1]{{\color{SymColor}\ensuremath{#1}}}
+\newcommand{\tuple}[1]{\{#1\}}
+\newcommand{\uscore}{\ensuremath{\underline{\phantom{x}}}}
+\newcommand{\hs}{\rule{0.2em}{0ex}}
+
+% the Erlang prompt:
+\newcounter{erlprompt}
+\renewcommand{\theerlprompt}{\arabic{erlprompt}}
+\newcommand{\ereset}{\setcounter{erlprompt}{0}}
+\newcommand{\estart}{\ereset%
+  \xout{Erlang/OTP 20 [erts-9.0] [source] \ldots}\\%
+  \xout{Eshell V9.0  (abort with $\wedge$G)}\rule{0em}{3ex}\\}
+\newcommand{\epromptx}{\eprompt{}\addtocounter{erlprompt}{-1}}
+\newcommand{\eprompt}{\refstepcounter{erlprompt}\theerlprompt>}
+
+% other handy stuff
+\newcommand{\hide}[1]{}
+\newcommand{\ttilde}{\texttildelow}
+
+\newcommand{\cudadev}{\code{\_\_device\_\_}}
+\newcommand{\cudaglob}{\code{\_\_global\_\_}}
+\newcommand{\cudashared}{\code{\_\_shared\_\_}}
+
+% stuff for solution sets
+\hide{
+\newcommand{\ans}[1]{{\color{anscolor}#1}}
+\newcommand{\answer}[1]{{\color{anscolor}#1}}
+\newenvironment{AnsBlock}{\begin{quote}\color{anscolor}}{\end{quote}}
+\newenvironment{AnsCode}{%
+  \tt\color{anscolor}\begin{tabbing}\codetabs\+\kill}{\end{tabbing}}
+\newcommand{\anscode}[1]{\texttt{\color{anscolor}#1}}
+}
+
+% coloring links
+\usepackage{hyperref}
+\newcommand{\hrefc}[2]{{\color{URLcolor}\textsf{\href{#1}{\underline{#2}}}}}
+\newcommand{\hyperlinkc}[2]{{\hyperlink{#1}{\color{URLcolor}\textsf{\underline{#2}}}}}
+\newcommand{\hyperlinkcd}[2]{{\hyperlink{#1}{\color{URLdarkcolor}\textsf{\underline{#2}}}}}
+\newcommand{\hyperlinkcc}[2]{{\hyperlink{#1}{\code{\color{URLcolor}\underline{#2}}}}}
+\newcommand{\urlc}[1]{{\color{URLcolor}\underline{\textsf{\url{#1}}}}}
+\newcommand{\hyperslide}[1]{\hyperlinkc{#1}{slide \ref{#1}}}
+\newcommand{\ccite}[1]{{\color{URLcolor}\cite{#1}}}
+
+% Things that Ian likes.
+\newcommand{\bigO}{\mathcal{O}}
+\newlength{\fillInLineSpace}
+\setlength{\fillInLineSpace}{2ex}
+
+
+\newcommand{\bothcopyrightdocument}{%
+  \parbox{0.15\textwidth}{
+  \raggedleft
+  \href{http://creativecommons.org/licenses/by/4.0/}{\includegraphics[width=0.15\textwidth]{cc-by}}}
+  \hfill
+  \parbox{0.80\textwidth}{
+  \footnotesize
+  Unless otherwise noted or cited, 
+  this document is copyright 2017 by Mark Greenstreet \& Ian M. Mitchell
+  and is made available under the terms of the Creative Commons
+  Attribution 4.0 International license
+  \url{http://creativecommons.org/licenses/by/4.0/}}
+}
+
+% define subsection curly 1)
+% \renewcommand\thesubsection{(\alph{subsection})}
+\newcommand\crule[3][black]{\textcolor{#1}{\rule{#2}{#3}}}
+\newcommand{\thiscolor}[1]{#1 \crule[#1]{0.75em}{0.75em}}
+
+% code style
+\definecolor{dkgreen}{rgb}{0,0.6,0}
+\definecolor{gray}{rgb}{0.5,0.5,0.5}
+\definecolor{mauve}{rgb}{0.58,0,0.82}
+
+\lstset{frame=tb,
+    language=erlang,
+    aboveskip=3mm,
+    belowskip=3mm,
+    showstringspaces=false,
+    columns=flexible,
+    basicstyle={\small\ttfamily},
+    numbers=none,
+    numberstyle=\tiny\color{gray},
+    keywordstyle=\color{blue},
+    commentstyle=\color{dkgreen},
+    stringstyle=\color{mauve},
+    breaklines=true,
+    breakatwhitespace=true,
+    tabsize=3
+}
+
+\usepackage{xcolor}
+\usepackage{textcomp}
+
+\definecolor{comment}{RGB}{0,128,0} % dark green
+\definecolor{string}{RGB}{255,0,0}  % red
+\definecolor{keyword}{RGB}{0,0,255} % blue
+
+\lstset{
+    language=c,
+	commentstyle=\color{comment},
+	stringstyle=\color{string},
+	keywordstyle=\color{keyword},
+	basicstyle=\footnotesize\ttfamily,
+	% numbers=left,
+	% numberstyle=\tiny,
+	% numbersep=5pt,
+	frame=lines,
+	breaklines=true,
+	prebreak=\raisebox{0ex}[0ex][0ex]{\ensuremath{\hookleftarrow}},
+	showstringspaces=false,
+	upquote=true,
+	tabsize=2,
+}
+
+
+\NeedsTeXFormat{LaTeX2e}
+\ProvidesPackage{subfiles}[2002/06/08 Federico Garcia]
+\DeclareOption*{\PackageWarning{\CurrentOption ignored}}
+\ProcessOptions
+\RequirePackage{verbatim}
+% \newcommand{\skip@preamble}{%
+%     \let\document\relax\let\enddocument\relax%
+%     \newenvironment{document}{}{}%
+%     \renewcommand{\documentclass}[2][subfiles]{}}
+% \newcommand\subfile[1]{\begingroup\skip@preamble\input{#1}\endgroup}
+\endinput

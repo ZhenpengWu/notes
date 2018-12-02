@@ -1,0 +1,65 @@
+\documentclass[../main.tex]{subfiles} 
+% !TEX root= ../main.tex
+
+\begin{document}
+
+\begin{lstlisting}[language=erlang]
+    % boolean expressions
+    not true.
+    true and false.
+    true or true.
+    true xor true.
+    
+    length(List). % return the length of List
+    max(A,B). % return the max
+    abs(A). % return the absolute value
+    element(Index, Tuple). % return the element at position Index in the Tuple
+    	[X * X || X <- lists:seq(1,5)]. % [1,4,9,16,25]
+    
+    % lists
+    lists:seq(N). % return  a list with length N
+    lists:sum(List). % return the sum of List
+    lists:map(fun() -> ok end, List). % apply function to each element in the List
+    lists:nth(N, List). % return Nth element in the List
+    lists:foldl(fun(Val, Acc) -> ok end, Acc, List).
+    lists:mapfoldl(fun(X, Sum) -> {2*X, X+Sum} end, 0, [1,2,3,4,5]). % {[2,4,6,8,10],15}
+    
+    % if-statement
+    if a == b -> 1;
+    b == c -> 2;
+    true -> 3
+    end.
+    
+    % switch-statement
+    case Q of
+    a -> 1;
+    b -> 2;
+    c -> 3
+    end.
+    
+    % sending and receiving messages
+    Pid ! Expr.
+    receive
+    Pattern1 -> Expr1;
+    Pattern2 -> Expr2;
+    end.
+    % a new process is created- the child
+    % when fun returns, the child process terminates, return value is discarded.
+    spawn(fun()-> ok end)
+    
+    % bitwise
+    2#0101 bor 2#1100 -> 2#1101. % base2
+    16#a -> 10. % base16
+    
+    Acc ++ List. % O(|Acc|) work for the ++ operation.
+\end{lstlisting}
+
+
+\begin{itemize}
+	\item \textbf{Referential Transparency:} a variable get a value when it is declared and that the value of the variable never changes.
+    \item \textbf{Tail-recursive:} In comparison to headFactorial, tailFactorial is tail recursive because the recursive call is the very last thing that the function does.
+    \item \textbf{Head-recursive:} the recursion call is made while there is still a pending operation for the current call of the function.
+	\item \textbf{Tail-call elimination:} overwrite the caller’s stack frame with a new frame for caller (tail-call elimination turns tail-recursive functions into while-loops)
+\end{itemize}
+
+\end{document}

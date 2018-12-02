@@ -1,0 +1,44 @@
+\documentclass[../main.tex]{subfiles}
+% !TEX root= ../main.tex
+
+\begin{document}
+
+\subsection{The Parallel Random Access Machine(PRAM) Model}
+
+\begin{itemize}
+	\item A computer is composed of multiple processors and a \textit{shared memory}.
+	\item The processor are like those from the RAM model, operate in lockstep.
+	\item The memory allows each processor to perform a read or write in a single step. Multiple reads and writes can be performed in the same cycle.
+\end{itemize}
+
+\subsection{The Work-Span Model}
+
+\begin{align*}
+	T_\infty \leq T_P \leq \frac{1}{P}(T_1 - T_\infty) + T_\infty
+\end{align*}
+
+\begin{itemize}
+	\item \textbf{Limitation:} Work-span ignores communication cost.
+\end{itemize}
+
+\subsection{The Candidate Type Architecture (CTA) Model}
+
+\begin{itemize}
+	\item A computer is composed of multiple processors.
+	\item Each processor has \textit{local memory} that can be accessed in a single processor step.
+	\item A small number of connections to a communication network.
+	\item Sending \(W\) words cost \(\lambda + t_w W\), \(\lambda\) means communication delay and overhead.
+	\item \textbf{Limitation:} Communication is expensive, but it doesn’t explicitly charge for bandwidth.
+\end{itemize}
+
+\subsection{The LogP Model}
+
+\begin{itemize}
+	\item \code{L}, the latency of the communication network fabric
+	\item \code{o}, the overhead of a communication action
+	\item \code{g}, the bandwidth of the communication network
+	\item \code{P}, the number of processors
+	\item \textbf{Limitation:} logP accounts for bandwidth, but doesn’t recognize that all bandwidth is not the same.
+\end{itemize}
+
+\end{document}
