@@ -6,7 +6,7 @@
 \subsection{The MESI protocol}
 
 \begin{center}
-	\includegraphics[scale=0.6]{mesi.png}
+	\includegraphics[scale=0.65]{mesi.png}
 \end{center}
 
 \begin{itemize}
@@ -18,12 +18,12 @@
 	\item Caches can \textbf{shared read-only} copies of a cache block.
 	\item When a processor writes a cache block, the \textbf{first write} goes to main memory
 	      \begin{itemize}
-		      \item The other caches are notified adn invalidate their copies.
+		      \item The other caches are notified and invalidate their copies.
 		      \item This ensures that writeable blocks are exclusive.
 	      \end{itemize}
 	\item MESI guarantees \textbf{sequential consistency}.
 	      \begin{itemize}
-		      \item All memory reads and writes from all processors can be arranged into a single, subsequential order.
+		      \item All memory reads and writes from all processors can be arranged into a single, sub-sequential order.
 	      \end{itemize}
 	\item \textbf{Weak Consistency:} Reads can move ahead of writes to maximize program performance.
 \end{itemize}
@@ -49,11 +49,12 @@
 		      \item The memory unit sends messages to the other CPUs to direct them to take actions as needed by the protocol
 		      \item The ordering of these messages ensures that memory stays consistent.
 	      \end{itemize}
-	\item \textbf{Comparison:}
+	      \end{itemize}
+
+	\subsubsection{Comparison}
 	      \begin{itemize}
 		      \item Snooping is simple for machines with a small number of processors.
 		      \item Directory methods scale better to large numbers of processors.
 	      \end{itemize}
-\end{itemize}
 
 \end{document}

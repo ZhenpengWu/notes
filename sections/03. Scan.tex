@@ -3,14 +3,19 @@
  
 \begin{document}
 
+\begin{center}
+    \includegraphics[scale=0.5]{images/scan.png}
+\end{center}
+
 \begin{itemize}
+    \item Scan in two passes    
 	\item Upward Pass: Reduce
 	      \begin{itemize}
 		      \item Each node receives values from left and right subtrees.
 		      \item The node combine these values, and send the results to the parent.
-		      \item Teh combine at the root produces the total for all nodes.
+		      \item The combine at the root produces the total for all nodes.
 	      \end{itemize}
-	\item Downward Pass: Scan
+	\item Downward Pass:
 	      \begin{itemize}
 		      \item Each node has the values from its left and right children.
 		      \item When a node receives a value from its parent:

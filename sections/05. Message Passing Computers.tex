@@ -21,6 +21,8 @@
 
 \subsection{Diameter, Bisection Bandwidth, and Port Number of Each Network}
 
+\renewcommand{\arraystretch}{1.5}
+
 \begin{center}
 	\begin{tabular}{| c | c | c | c | c |}
 		\hline
@@ -45,7 +47,11 @@
 \begin{multicols}{2}
 	\begin{itemize}
 		\item \textbf{Advantages:} Simple
-		\item \textbf{Disadvantages:} Worst-case latency grows as \(O(P)\), Easily congested --- limited bandwidth.
+		\item \textbf{Disadvantages:}
+		\begin{itemize}
+		    \item Worst-case latency grows as \(O(P)\)
+		    \item Easily congested --- limited bandwidth.
+		\end{itemize} 
 	\end{itemize}
 
 	\begin{center}
@@ -98,6 +104,9 @@
 
 \subsubsection{Tori}
 
+	\begin{center}
+		\includegraphics[scale=0.4]{2d-torus.png}
+	\end{center}
 \begin{multicols}{2}
 	\begin{itemize}
 		\item \textbf{Advantages:}
@@ -110,16 +119,18 @@
 			      \item make lower latency between neighbours
 			      \item bounded degree nodes are more modular thus easier to implement
 		      \end{itemize}
+		      	\end{itemize}
+
+		      	\begin{itemize}
+
 		\item \textbf{Disadvantages:}
 		      \begin{itemize}
 			      \item Worst-case latency grows as \(\sqrt{P}\).
 		      \end{itemize}
 	\end{itemize}
-
-	\begin{center}
-		\includegraphics[scale=0.4]{2d-torus.png}
-	\end{center}
 \end{multicols}
+
+
 
 \subsection{Hypercubes}
 
@@ -136,7 +147,7 @@
 		      \end{itemize}
 		\item \textbf{Disadvantages:}
 		      \begin{itemize}
-			      \item Doesn’t become “all wire” for networks with a large number of processors.
+			      \item Doesn't become "all wire“ for networks with a large number of processors.
 		      \end{itemize}
 	\end{itemize}
 
@@ -147,11 +158,11 @@
 
 \subsubsection{Trees}
 
-% \begin{multicols}{2}
-
 \begin{center}
 	\includegraphics[scale=0.4]{binary-tree.png}
 \end{center}
+
+\begin{multicols}{2}
 
 \begin{itemize}
 	\item \textbf{Advantages:}
@@ -164,15 +175,20 @@
 	      \begin{itemize}
 		      \item \textbf{Low-bandwidth:} bottleneck at root.
 	      \end{itemize}
+\end{itemize}
+
+\begin{itemize}
+
 	\item \textbf{Diameter and Bisection bandwidth}
 	      \begin{itemize}
 		      \item \textbf{Binary Tree}: P = 15, Diameter \(= 2\times \log_2{\frac{P+1}{2}} = 6\), Bisection bandwidth \(= 1\)
 		      \item \textbf{3-ary Tree}: P = 13, Diameter \(= 4\), Bisection bandwidth \(= 3\)
 		      \item \textbf{4-ary Tree}: P = 21, Diameter \(= 4\), Bisection bandwidth \(= 2\)
-	      \end{itemize}
 \end{itemize}
 
-% \end{multicols}
+\end{itemize}
+
+\end{multicols}
 
 \subsubsection{Fat Trees}
 

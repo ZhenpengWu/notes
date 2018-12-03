@@ -6,23 +6,17 @@
 \begin{itemize}
 	\item \textbf{Dependencies:}
 	      \begin{itemize}
-		      \item Read-After-Write (RAW)
-		      \item Write-After-Read (WAR)
-		      \item Write-After-Write (WAW)
-		      \item Control Dependencies
+		      \item Read-After-Write (RAW): \(inst_j\) reads a register or memory location written by \(inst_i\)
+		      \item Write-After-Read (WAR): \(inst_j\) writes a location read by \(inst_i\)
+		      \item Write-After-Write (WAW): \(inst_i\) and \(inst_j\) write the same location.
+		      \item Control Dependencies: \(inst_i\) is a control flow instruction, we need to execture the correct instructions.
 	      \end{itemize}
 	\item \textbf{Hazards:}
 	      \begin{itemize}
-		      \item \textbf{Handling Hazards:}
-		            \begin{itemize}
-			            \item Bypass, if an instruction has a result that a later instruction needs, the earlier instruction can provide that result directly without waiting to go through the register file.
-			            \item Move common operations early.
-			            \item Stall
-		            \end{itemize}
 		      \item \textbf{Data Hazards}:
 		            \begin{itemize}
-			            \item an instruction can read a different value than would have been read with a sequential execution of instructions.
-			            \item if a register or memory location is left holding a different value value than it would have had in a sequential execution.
+			            \item an instruction read a different value than would have been read with a sequential execution of instructions
+			            \item if a register or memory location is left holding a different value value than it would have had in a sequential execution
 		            \end{itemize}
 		      \item \textbf{Control Hazards}:
 		            \begin{itemize}
@@ -30,6 +24,12 @@
 			            \item This is because the instruction depends on a jump or branch that hasn't finished in time.
 		            \end{itemize}
 	      \end{itemize}
+	      \item \textbf{Handling Hazards:}
+		            \begin{itemize}
+			            \item Bypass, if an instruction has a result that a later instruction needs, the earlier instruction can provide that result directly without waiting to go through the register file.
+			            \item Move common operations early.
+			            \item If nothing else helps, stall.
+		            \end{itemize}
 \end{itemize}
 
 \subsection{Register Renaming}
@@ -60,144 +60,6 @@
 	\item Decode them in parallel, and send them to issue queues for the appropriate functional unit.
 	\item Handling Dependencies using \textbf{Register Renaming} and \textbf{Branch Speculation}
 	\item \textbf{Multi-threading:} The features for executing multiple instruction in parallel work well for mixing instructions from several threads or processes.
-\end{itemize}
-
-
-\subsection{Comparisons among Shared Memory, Message Passing, and Superscalar}
-
-Whether shared memory or message passing is faster depends on the problem being solved, the quality of the implementations, and the system (s) it is running on. For example, on a single server, it will probably be easier and higher performance to use a shared memory programming environment. Across a distributed cluster, it will probably be faster to use a message passing library.
-
-\subsubsection{Shared Memory}
-
-\begin{itemize}
-	\item \textbf{Advantages:}
-	      \begin{itemize}
-		      \item \textbf{High bandwidth:} the buses that connect the cache can be very wide, especially if the caches are on a single chip.
-		      \item \textbf{Low latency:} the hardware handles moving the data -- no os calls and context-switch overheads.
-		      \item One thread can pass an entire data structure to another thread just by giving a pointer.
-		      \item No need to pack-up trees, graphs, or other data structure as messages and unpack them at the receiving end.
-	      \end{itemize}
-	\item \textbf{Disadvantages:}
-	      \begin{itemize}
-		      \item   {
-		            Poor scaling of coherence models to large numbers of processors.
-		            Shared memory \textbf{doesn't scale} as well as message passing.
-		            \begin{itemize}
-			            \item In a message passing machine, each CPU has its own memory, nearby and fast.
-			            \item For large machines, the latency of directory accesses can severely degrade performance.
-			            \item Shared memory moves the data after the cache miss, this stalls a thread.
-		            \end{itemize}
-		            }
-		      \item It's easy to overlook synchronization (control to shared data structures). Then we get data races, corrupted data structures, and other hard-to-track--down bugs.
-		      \item A defensive reaction is to wrap every shared reference with a lock, but locks are slow.
-	      \end{itemize}
-\end{itemize}
-
-\subsubsection{Message Passing}
-
-\begin{itemize}
-	\item \textbf{Advantages:} reduce the need for synchronization construct.
-	\item \textbf{Disadvantages:} Network delays.
-\end{itemize}
-
-\subsubsection{Superscalar}
-
-\begin{itemize}
-	\item \textbf{Advantages:}
-	      \begin{itemize}
-		      %   \item reduce the need for synchronization construct.
-		      \item Scientific computing
-		      \item Commercial computing (databases, webservers):
-		            \begin{itemize}
-			            \item Have large data set and  high cache miss rates
-			            \item find executable instructions after cache miss
-		            \end{itemize}
-	      \end{itemize}
-	\item \textbf{Disadvantages:}
-	      \begin{itemize}
-		      \item Limited instruction level parallelism.
-		      \item Burning lots of power
-		      \item Many operations require hardware grows quadratically with W
-	      \end{itemize}
-\end{itemize}
-
-\subsection{Parallel Performance, Speedup and Efficiency}
-
-\begin{itemize}
-	\item \textbf{Latency:} time from starting a task until it completes.
-	\item \textbf{Throughput:} the rate at which task are completed.
-	      \begin{align*}
-		      throughput & = \frac{1}{latency}    & \text{sequential programming} \\
-		      throughput & \geq \frac{1}{latency} & \text{parallel programming}
-	      \end{align*}
-	\item \textbf{Speed-up} is a number that measures the relative performance of two systems processing the same problem.
-	      \begin{align*}
-		      \textbf{Speed-up} & = \frac{T_{seq}}{T_{par}}
-	      \end{align*}
-	\item \textbf{Efficiency} is a related measure of what fraction of the $P$ processors are kept busy
-	      \begin{align*}
-		      \textbf{Efficiency} & = \frac{Speedup}{P}
-	      \end{align*}
-\end{itemize}
-
-\subsection{Amdahl's Law}
-
-\begin{align*}
-	T_{par} & = T_{seq} \times (s + \frac{1-s}{P})
-\end{align*}
-
-\begin{itemize}
-	\item Give a sequential program where
-	      \begin{itemize}
-		      \item fraction \(s\) of the execution time is inherently sequential.
-		      \item fraction \(1-s\) of the execution time benefits perfectly from speed-up.
-	      \end{itemize}
-	\item Amdahl’s law assumes that the part of the code that can improve from parallel computation achieves perfect speed-up; in other words, that portion of computation achieves a speed-up of P when executed with P processors. In reality, parallel overheads (such as those mentioned above) keep us from achieving such a speed-up.
-	\item \textbf{Gustafson's Law:} Many computation have \(s\) that decreases as N increases.
-	\item Parallelism offers \textbf{modest returns} unless the problem is of fairly low complexity.
-\end{itemize}
-
-\subsection{Brent's Lemma}
-
-\begin{align*}
-	T_P                                       & \leq \frac{T_{1}}{P} + T_\infty                                               \\
-	\text{Speed-up}_{P} = \frac{T_{1}}{T_{P}} & \geq \frac{T_{1}}{T_{1} / P + T_\infty} = \frac{P}{1 + \frac{T_\infty}{T1} P}
-\end{align*}
-
-\begin{itemize}
-	\item \(T_1\) = sequential time = Work
-	\item \(T_\infty\) = unlimited parallelism time = Span
-	\item Brent's Lemma provides an upper bound on time and thus a lower bound on speed-up.
-	\item By using the work-span graph, Brent’s lemma accounts for computations that have limited parallelism, even if they are not purely sequential.
-\end{itemize}
-
-\subsection{Work and Span}
-
-\begin{itemize}
-	\item Vertices correspond to operations.
-	\item Edges represent \textbf{dependencies}.
-	\item \textbf{Work:} is the total number of vertices, corresponding to the sequential execution time.
-	\item \textbf{Span:} is the longest path from an initial vertex to a final vertex.
-	\item Work-span model provide the upper-bound and lower bound of speedup.
-\end{itemize}
-
-\subsection{Super-Linear Speedup}
-
-\begin{itemize}
-	\item \textbf{Super-Linear Speedup:} Speedup > P
-	      \begin{itemize}
-		      \item This can occur because the parallel machine has more fast memory (e.g. registers, cache, DRAM) in total than a single processor, and can have a higher fraction of its data references going to faster memory.
-		      \item Another cause is multi-threading where several threads can make better use of the resource of a super-scalar processor than a single thread can.
-	      \end{itemize}
-	\item \textbf{Linear Speedup:} Speedup = P
-	\item \textbf{Sub-Linear Speedup:} Speedup < P
-\end{itemize}
-
-\subsection{Embarrassingly Parallel Problems}
-
-\begin{itemize}
-	\item Problems that can be solved by a large number of processors with very little communication or coordination.
-	\item Overheads which is likely to impact on embarrassingly parallel problems, idle processes, extra computation, and extra memory.
 \end{itemize}
 
 \end{document}

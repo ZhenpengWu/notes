@@ -1,0 +1,89 @@
+\documentclass[../main.tex]{subfiles}
+% !TEX root= ../main.tex
+
+\begin{document}
+
+\subsection{Parallel Performance, Speedup and Efficiency}
+
+\begin{itemize}
+	\item \textbf{Latency:} time from starting a task until it completes.
+	\item \textbf{Throughput:} the rate at which task are completed.
+	   %   \begin{align*}
+	   \[
+		      \text{throughput}  = \frac{1}{\text{latency}}   \hspace{5em}  \text{sequential programming}
+		      \]
+	      \[
+	      \text{throughput}  \geq \frac{1}{\text{latency}} \hspace{5em}\text{parallel programming}
+	      \]
+	   %   \end{align*}
+	\item \textbf{Speed-up} is a number that measures the relative performance of two systems processing the same problem.
+	      \begin{align*}
+		      \textbf{Speed-up} & = \frac{T_{seq}}{T_{par}}
+	      \end{align*}
+	\item \textbf{Efficiency} is a related measure of what fraction of the $P$ processors are kept busy
+	      \begin{align*}
+		      \textbf{Efficiency} & = \frac{Speedup}{P}
+	      \end{align*}
+\end{itemize}
+
+\subsection{Amdahl's Law}
+
+\begin{align*}
+	T_{par} & = T_{seq} \times (s + \frac{1-s}{P})
+\end{align*}
+
+\begin{itemize}
+	\item Give a sequential program where
+	      \begin{itemize}
+		      \item fraction \(s\) of the execution time is inherently sequential.
+		      \item fraction \(1-s\) of the execution time benefits perfectly from speed-up.
+	      \end{itemize}
+	\item Amdahl’s law assumes that the part of the code that can improve from parallel computation achieves perfect speed-up; in other words, that portion of computation achieves a speed-up of P when executed with P processors. In reality, parallel overheads (such as those mentioned above) keep us from achieving such a speed-up.
+	\item \textbf{Gustafson's Law:} Many computation have \(s\) that decreases as N increases.
+	\item Parallelism offers \textbf{modest returns} unless the problem is of fairly low complexity.
+\end{itemize}
+
+\subsection{Brent's Lemma}
+
+\begin{align*}
+	T_P                                       & \leq \frac{T_{1}}{P} + T_\infty                                               \\
+	\text{Speed-up}_{P} = \frac{T_{1}}{T_{P}} & \geq \frac{T_{1}}{T_{1} / P + T_\infty} = \frac{P}{1 + \frac{T_\infty}{T1} P}
+\end{align*}
+
+\begin{itemize}
+	\item \(T_1\) = sequential time = Work
+	\item \(T_\infty\) = unlimited parallelism time = Span
+	\item Brent's Lemma provides an upper bound on time and thus a lower bound on speed-up.
+	\item By using the work-span graph, Brent’s lemma accounts for computations that have limited parallelism, even if they are not purely sequential.
+\end{itemize}
+
+\subsection{Work and Span}
+
+\begin{itemize}
+	\item Vertices correspond to operations.
+	\item Edges represent \textbf{dependencies}.
+	\item \textbf{Work:} is the total number of vertices, corresponding to the sequential execution time.
+	\item \textbf{Span:} is the longest path from an initial vertex to a final vertex.
+	\item Work-span model provide the upper-bound and lower bound of speedup.
+\end{itemize}
+
+\subsection{Super-Linear Speedup}
+
+\begin{itemize}
+	\item \textbf{Super-Linear Speedup:} Speedup > P
+	      \begin{itemize}
+		      \item This can occur because the parallel machine has more fast memory (e.g. registers, cache, DRAM) in total than a single processor, and can have a higher fraction of its data references going to faster memory.
+		      \item Another cause is multi-threading where several threads can make better use of the resource of a super-scalar processor than a single thread can.
+	      \end{itemize}
+	\item \textbf{Linear Speedup:} Speedup = P
+	\item \textbf{Sub-Linear Speedup:} Speedup < P
+\end{itemize}
+
+\subsection{Embarrassingly Parallel Problems}
+
+\begin{itemize}
+	\item Problems that can be solved by a large number of processors with very little communication or coordination.
+	\item Overheads which is likely to impact on embarrassingly parallel problems, idle processes, extra computation, and extra memory.
+\end{itemize}
+
+\end{document}

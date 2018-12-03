@@ -1,0 +1,62 @@
+\documentclass[../main.tex]{subfiles}
+% !TEX root= ../main.tex
+
+\begin{document}
+
+Whether shared memory or message passing is faster depends on the problem being solved, the quality of the implementations, and the system (s) it is running on. For example, on a single server, it will probably be easier and higher performance to use a shared memory programming environment. Across a distributed cluster, it will probably be faster to use a message passing library.
+
+\subsection{Shared Memory}
+
+\begin{itemize}
+	\item \textbf{Advantages:}
+	      \begin{itemize}
+		      \item \textbf{High bandwidth:} the buses that connect the cache can be very wide, especially if the caches are on a single chip.
+		      \item \textbf{Low latency:} the hardware handles moving the data -- no os calls and context-switch overheads.
+		      \item One thread can pass an entire data structure to another thread just by giving a pointer.
+		      \item No need to pack-up trees, graphs, or other data structure as messages and unpack them at the receiving end.
+	      \end{itemize}
+	\item \textbf{Disadvantages:}
+	      \begin{itemize}
+		      \item   {
+		            Poor scaling of coherence models to large numbers of processors.
+		            Shared memory \textbf{doesn't scale} as well as message passing.
+		            \begin{itemize}
+			            \item In a message passing machine, each CPU has its own memory, nearby and fast.
+			            \item For large machines, the latency of directory accesses can severely degrade performance.
+			            \item Shared memory moves the data after the cache miss, this stalls a thread.
+		            \end{itemize}
+		            }
+		      \item It's easy to overlook synchronization (control to shared data structures). Then we get data races, corrupted data structures, and other hard-to-track--down bugs.
+		      \item A defensive reaction is to wrap every shared reference with a lock, but locks are slow.
+	      \end{itemize}
+\end{itemize}
+
+\subsection{Message Passing}
+
+\begin{itemize}
+	\item \textbf{Advantages:} reduce the need for synchronization construct.
+	\item \textbf{Disadvantages:} Network delays.
+\end{itemize}
+
+\subsection{Superscalar}
+
+\begin{itemize}
+	\item \textbf{Advantages:}
+	      \begin{itemize}
+		      %   \item reduce the need for synchronization construct.
+		      \item Scientific computing
+		      \item Commercial computing (databases, webservers):
+		            \begin{itemize}
+			            \item Have large data set and  high cache miss rates
+			            \item find executable instructions after cache miss
+		            \end{itemize}
+	      \end{itemize}
+	\item \textbf{Disadvantages:}
+	      \begin{itemize}
+		      \item Limited instruction level parallelism.
+		      \item Burning lots of power
+		      \item Many operations require hardware grows quadratically with W
+	      \end{itemize}
+\end{itemize}
+
+\end{document}
