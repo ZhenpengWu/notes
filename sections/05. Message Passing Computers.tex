@@ -48,10 +48,10 @@
 	\begin{itemize}
 		\item \textbf{Advantages:} Simple
 		\item \textbf{Disadvantages:}
-		\begin{itemize}
-		    \item Worst-case latency grows as \(O(P)\)
-		    \item Easily congested --- limited bandwidth.
-		\end{itemize} 
+		      \begin{itemize}
+			      \item Worst-case latency grows as \(O(P)\)
+			      \item Easily congested --- limited bandwidth.
+		      \end{itemize}
 	\end{itemize}
 
 	\begin{center}
@@ -104,9 +104,9 @@
 
 \subsubsection{Tori}
 
-	\begin{center}
-		\includegraphics[scale=0.4]{2d-torus.png}
-	\end{center}
+\begin{center}
+	\includegraphics[scale=0.4]{2d-torus.png}
+\end{center}
 \begin{multicols}{2}
 	\begin{itemize}
 		\item \textbf{Advantages:}
@@ -119,9 +119,9 @@
 			      \item make lower latency between neighbours
 			      \item bounded degree nodes are more modular thus easier to implement
 		      \end{itemize}
-		      	\end{itemize}
+	\end{itemize}
 
-		      	\begin{itemize}
+	\begin{itemize}
 
 		\item \textbf{Disadvantages:}
 		      \begin{itemize}
@@ -164,29 +164,29 @@
 
 \begin{multicols}{2}
 
-\begin{itemize}
-	\item \textbf{Advantages:}
-	      \begin{itemize}
-		      \item Simple network: \# of routing nodes = \# of processors - 1
-		      \item Wiring: \(O(\log_2{N})\) extra height, \(O(N\log_2{N})\) extra area.
-		      \item \textbf{Low-latency:} \(O(\log_2{N}) +\) wire delay.
-	      \end{itemize}
-	\item \textbf{Disadvantages:}
-	      \begin{itemize}
-		      \item \textbf{Low-bandwidth:} bottleneck at root.
-	      \end{itemize}
-\end{itemize}
+	\begin{itemize}
+		\item \textbf{Advantages:}
+		      \begin{itemize}
+			      \item Simple network: \# of routing nodes = \# of processors - 1
+			      \item Wiring: \(O(\log_2{N})\) extra height, \(O(N\log_2{N})\) extra area.
+			      \item \textbf{Low-latency:} \(O(\log_2{N}) +\) wire delay.
+		      \end{itemize}
+		\item \textbf{Disadvantages:}
+		      \begin{itemize}
+			      \item \textbf{Low-bandwidth:} bottleneck at root.
+		      \end{itemize}
+	\end{itemize}
 
-\begin{itemize}
+	\begin{itemize}
 
-	\item \textbf{Diameter and Bisection bandwidth}
-	      \begin{itemize}
-		      \item \textbf{Binary Tree}: P = 15, Diameter \(= 2\times \log_2{\frac{P+1}{2}} = 6\), Bisection bandwidth \(= 1\)
-		      \item \textbf{3-ary Tree}: P = 13, Diameter \(= 4\), Bisection bandwidth \(= 3\)
-		      \item \textbf{4-ary Tree}: P = 21, Diameter \(= 4\), Bisection bandwidth \(= 2\)
-\end{itemize}
+		\item \textbf{Diameter and Bisection bandwidth}
+		      \begin{itemize}
+			      \item \textbf{Binary Tree}: P = 15, Diameter \(= 2\times \log_2{\frac{P+1}{2}} = 6\), Bisection bandwidth \(= 1\)
+			      \item \textbf{3-ary Tree}: P = 13, Diameter \(= 4\), Bisection bandwidth \(= 3\)
+			      \item \textbf{4-ary Tree}: P = 21, Diameter \(= 4\), Bisection bandwidth \(= 2\)
+		      \end{itemize}
 
-\end{itemize}
+	\end{itemize}
 
 \end{multicols}
 

@@ -17,15 +17,13 @@ Whether shared memory or message passing is faster depends on the problem being 
 	      \end{itemize}
 	\item \textbf{Disadvantages:}
 	      \begin{itemize}
-		      \item   {
-		            Poor scaling of coherence models to large numbers of processors.
+		      \item Poor scaling of coherence models to large numbers of processors.
 		            Shared memory \textbf{doesn't scale} as well as message passing.
 		            \begin{itemize}
 			            \item In a message passing machine, each CPU has its own memory, nearby and fast.
 			            \item For large machines, the latency of directory accesses can severely degrade performance.
 			            \item Shared memory moves the data after the cache miss, this stalls a thread.
 		            \end{itemize}
-		            }
 		      \item It's easy to overlook synchronization (control to shared data structures). Then we get data races, corrupted data structures, and other hard-to-track--down bugs.
 		      \item A defensive reaction is to wrap every shared reference with a lock, but locks are slow.
 	      \end{itemize}

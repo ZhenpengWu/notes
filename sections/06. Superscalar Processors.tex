@@ -24,12 +24,12 @@
 			            \item This is because the instruction depends on a jump or branch that hasn't finished in time.
 		            \end{itemize}
 	      \end{itemize}
-	      \item \textbf{Handling Hazards:}
-		            \begin{itemize}
-			            \item Bypass, if an instruction has a result that a later instruction needs, the earlier instruction can provide that result directly without waiting to go through the register file.
-			            \item Move common operations early.
-			            \item If nothing else helps, stall.
-		            \end{itemize}
+	\item \textbf{Handling Hazards:}
+	      \begin{itemize}
+		      \item Bypass, if an instruction has a result that a later instruction needs, the earlier instruction can provide that result directly without waiting to go through the register file.
+		      \item Move common operations early.
+		      \item If nothing else helps, stall.
+	      \end{itemize}
 \end{itemize}
 
 \subsection{Register Renaming}
