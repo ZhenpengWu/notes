@@ -4,33 +4,25 @@
 \begin{document}
 
 \begin{itemize}
-	\item {
-	      Upward Pass: Reduce
+	\item Upward Pass: Reduce
 	      \begin{itemize}
 		      \item Each node receives values from left and right subtrees.
 		      \item The node combine these values, and send the results to the parent.
 		      \item Teh combine at the root produces the total for all nodes.
 	      \end{itemize}
-	      }
-	\item {
-	      Downward Pass: Scan
+	\item Downward Pass: Scan
 	      \begin{itemize}
 		      \item Each node has the values from its left and right children.
-		      \item {
-		            When a node receives a value from its parent:
+		      \item When a node receives a value from its parent:
 		            \begin{itemize}
 			            \item it sends the parent's value to its left subtree.
 			            \item it combine the parent's value with the value from the left subtree and sends this to the right subtree.
 		            \end{itemize}
-		            }
-		      \item {
-		            When a leaf receives a value from its parent
+		      \item When a leaf receives a value from its parent
 		            \begin{itemize}
 			            \item It combine this value with its own value and records that as its value as its result
 		            \end{itemize}
-		            }
 	      \end{itemize}
-	      }
 \end{itemize}
 
 \begin{lstlisting}[language=erlang]
